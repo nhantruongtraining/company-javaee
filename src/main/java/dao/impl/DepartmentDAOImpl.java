@@ -25,13 +25,6 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     @Override
     public Department save(DepartmentRequest departmentRequest) {
 
-//        Department department = new Department();
-//        department.setDepartmentName(departmentRequest.getDepartmentName());
-//        department.setStartDate(departmentRequest.getStartDate());
-//        this.em.persist(department);
-//        this.em.flush();
-//        return findByDepartmentName(departmentRequest.getDepartmentName());
-
         Department department = new Department();
         department.setDepartmentName(departmentRequest.getDepartmentName());
         department.setStartDate(departmentRequest.getStartDate());
@@ -49,15 +42,6 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         return updateDepartment;
     }
 
-    @Override
-    public void flush() {
-        this.em.flush();
-    }
-
-    @Override
-    public void removeEntity(Department department) {
-        this.em.remove(department);
-    }
 
     @Override
     public Department findById(Integer deptId) {
@@ -65,9 +49,6 @@ public class DepartmentDAOImpl implements DepartmentDAO {
                         "SELECT d FROM Department d " +
                                 "WHERE d.departmentId = :deptid", Department.class)
                 .setParameter("deptid", deptId).getSingleResult();
-//        if (findByIdQuery.isEmpty())
-//            throw new NoResultException("No department found");
-//        else  findByIdQuery.get();
 
     }
 
@@ -78,16 +59,5 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         if (null != department) {
             this.em.remove(department);
         }
-    }
-
-    @Override
-    public Department findByDepartmentName(String name) {
-        List<Department> findByIdQuery = em.createQuery(
-                        "SELECT d FROM Department d " +
-                                "WHERE d.departmentName = :deptname", Department.class)
-                .setParameter("deptname", name).getResultList();
-        if (findByIdQuery.isEmpty())
-            throw new NoResultException("No department found");
-        else return findByIdQuery.get(0);
     }
 }

@@ -14,13 +14,9 @@ public interface DepartmentDAO {
 
     Department update(Integer id, DepartmentRequest departmentRequest);
 
-    void flush();
-
-    void removeEntity(Department department);
 
     Department findById(Integer id);
 
     void remove(Integer id);
 
-    Department findByDepartmentName(String name);
 }
